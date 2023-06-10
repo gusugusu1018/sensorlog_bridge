@@ -1,0 +1,22 @@
+<launch>
+
+  <arg name="gui" default="true" />
+  <arg name="rvizconfig" default="$(find sensorlog_bridge)/rviz/pose.rviz" />
+  <param name="robot_description"
+    command="$(find xacro)/xacro $(find sensorlog_bridge)/urdf/iphone.urdf" />
+
+  <node pkg="sensorlog_bridge" type="sensorlog_bridge_node" name="sensorlog_bridge_node"
+    output="screen">
+    <param name="port" value="12000" />
+    <param name="buffer_length" value="2048" />
+    <param name="imu_topic_name" value="/iphone/imu" />
+    <param name="pose_topic_name" value="/iphone/pose" />
+    <param name="frame_id" value="iphone" />
+    <param name="device_id" value="my_iphone" />
+  </node>
+
+  <group if="$(arg gui)">
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+  </group>
+</launch>

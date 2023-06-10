@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<robot name="iphone">
+  <material name="white">
+    <color rgba="1.0 1.0 1.0 1.0" />
+  </material>
+  <link name="iphone_pose_link" />
+  <joint name="base_joint" type="floating">
+    <parent link="iphone_pose_link" />
+    <child link="iphone_link" />
+  </joint>
+  <link name="iphone_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <box size="0.0715 0.1467 0.00765" />
+      </geometry>
+      <material name="white" />
+    </visual>
+  </link>
+</robot>
